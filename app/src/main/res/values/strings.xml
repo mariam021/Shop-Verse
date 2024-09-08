@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Shop Verse</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">home</string>
+    <string name="search">search</string>
+    <string name="favorite">favorite</string>
+    <string name="profile">profile</string>
+    <string name="login_failed">Login failed. Please try again.</string>
+    <string name="signup_success">Sign up successful!</string>
+    <string name="signup_failed">Sign up failed. Please try again.</string>
+    <string name="add_to_favourite">add to favourite</string>
+    <string name="product_image">product image</string>
+</resources>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.shopverse.presentation.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_itemFragment"
+            app:destination="@id/itemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemFragment"
+        android:name="com.example.shopverse.presentation.itemDetails.ItemFragment"
+        android:label="fragment_item"
+        tools:layout="@layout/fragment_item">
+        <argument
+            android:name="images"
+            app:argType="string[]" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="description"
+            app:argType="string" />
+        <argument
+            android:name="category"
+            app:argType="string" />
+        <argument
+            android:name="availabilityStatus"
+            app:argType="string" />
+        <argument
+            android:name="discountPercentage"
+            app:argType="float" />
+        <argument
+            android:name="price"
+            app:argType="float" />
+        <argument
+            android:name="warrantyInformation"
+            app:argType="string" />
+        <argument
+            android:name="stock"
+            app:argType="integer" />
+        <argument
+            android:name="rating"
+            app:argType="float" />
+        <argument
+            android:name="weight"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.example.shopverse.presentation.favorite.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.shopverse.presentation.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.shopverse.presentation.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+</navigation>
