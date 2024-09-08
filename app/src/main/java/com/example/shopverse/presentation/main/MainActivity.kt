@@ -7,7 +7,6 @@ import com.example.shopverse.R
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.shopverse.databinding.ActivityMainBinding
-import com.example.shopverse.presentation.MainVM
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

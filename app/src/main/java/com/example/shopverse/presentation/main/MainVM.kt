@@ -1,4 +1,4 @@
-package com.example.shopverse.presentation
+package com.example.shopverse.presentation.main
 
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
