@@ -21,7 +21,21 @@ class EnteryActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
+        val currentFragmentId = navController.currentDestination?.id
 
+// Check if the current fragment is the ProfileFragment
+        if (currentFragmentId == R.id.profileFragment) {
+            // The ProfileFragment is the current fragment
 
+            val goToLogin = intent.getBooleanExtra("goToLogin", false)
+            if (goToLogin) {
+                // Navigate directly to the LoginFragment
+                navController.navigate(R.id.loginFragment)
+            } else {
+                // Show the WelcomeFragment first
+                navController.navigate(R.id.splashFragment)
+            }
+
+        }
     }
 }

@@ -63,9 +63,9 @@ class SignUpFragment : Fragment() {
         }
     }
     private fun validation(userName: String, email: String, password: String, phone: String): Boolean {
-        val isPasswordValid = Regex("^(?=.[A-Z])(?=.\\d)(?=.[@$!%?&])[A-Za-z\\d@$!%*?&]{8,}$")
+        val isPasswordValid = Regex("^(?=.*[A-Z])(?=.*\\d)(?=.*[@\$!%*?&])[A-Za-z\\d@\$!%*?&]{8,}\$")
         val iEmailValid = Regex("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")
-        if (userName.isEmpty()  ||email.isEmpty()  ||password.isEmpty() || phone.isEmpty()) {
+        if (userName.isEmpty() || email.isEmpty() || password.isEmpty() || phone.isEmpty()) {
             Toast.makeText(requireContext(), "Please fill all the fields", Toast.LENGTH_LONG).show()
             return false
         }
