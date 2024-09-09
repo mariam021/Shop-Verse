@@ -21,13 +21,4 @@ class ProfileVM(context: Context) : ViewModel() {
             _user.value = fetchedUser
         }
     }
-
-    fun signOutUser() {
-        viewModelScope.launch {
-            val currentUser = _user.value
-            currentUser?.let {
-                userRepository.updateUser(it.copy(isLoggedIn = false))
-            }
-        }
-    }
 }

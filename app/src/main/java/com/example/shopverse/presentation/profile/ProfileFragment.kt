@@ -6,25 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.shopverse.R
 import com.example.shopverse.data.local.user.UserDatabase
 import com.example.shopverse.databinding.FragmentProfileBinding
 import com.example.shopverse.presentation.EnteryActivity
+import com.example.shopverse.presentation.NavigationDestination
 import com.example.shopverse.presentation.login.LoginFragment
 
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: ProfileVM
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -37,24 +35,26 @@ class ProfileFragment : Fragment() {
 
 
         viewModel.user.observe(viewLifecycleOwner) { user ->
-            binding.email.text = user?.email.toString() ?: "Email not found"
-            binding.userName.text = user?.userName.toString() ?: "Username not found"
-            binding.userPhone.text = user?.phone.toString() ?: " Phone not found"
-            binding.userPassword.text = user?.password.toString() ?: " Password not found"
+            binding.email.text = user?.email.toString()
+            binding.userName.text = user?.userName.toString()
+            binding.userPhone.text = user?.phone.toString()
+            binding.userPassword.text = user?.password.toString()
 
         }
-        binding.btnSignOut.setOnClickListener() {
+        binding.btnSignOut.setOnClickListener {
             logoutUser()
         }
 
     }
     private fun logoutUser() {
-        viewModel.signOutUser()
-        val intent = Intent(requireActivity(), EnteryActivity::class.java)
-        intent.putExtra("fragment_id", R.id.loginFragment)  // Pass the fragment ID
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        val bundle = Bundle().apply {
+            putSerializable("navigationSource", NavigationDestination.ProfileFragment)
+        }
+        val intent = Intent(requireActivity(), EnteryActivity::class.java).apply {
+            putExtras(bundle)
+        }
+
         startActivity(intent)
-        requireActivity().finish()
     }
 
     override fun onDestroy() {
