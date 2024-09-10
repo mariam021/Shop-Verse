@@ -15,10 +15,20 @@ class ProfileVM(context: Context) : ViewModel() {
     private val userRepository = UserRepository(UserDatabase.getUserDatabase(context).userDao())
     private val _user = MutableLiveData<User>()
     val user: LiveData<User> get() = _user
+
     fun loadUser() {
         viewModelScope.launch {
             val fetchedUser = userRepository.getUser()
             _user.value = fetchedUser
+        }
+    }
+
+    fun logoutUser() {
+        viewModelScope.launch {
+            // Get the current logged-in user and update the login status to false
+            _user.value?.let { user ->
+                userRepository.setUserLoggedInStatus(user.email, false)
+            }
         }
     }
 }

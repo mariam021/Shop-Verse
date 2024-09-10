@@ -21,4 +21,7 @@ interface UserDao {
     suspend fun getLoggedInUser(): User?
     @Update
     suspend fun updateUser(user: User)
+
+    @Query("UPDATE User SET isLoggedIn = :isLoggedIn WHERE email = :email")
+    suspend fun setUserLoggedInStatus(email: String, isLoggedIn: Boolean)
 }

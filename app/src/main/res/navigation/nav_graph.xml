@@ -58,7 +58,11 @@
         android:id="@+id/favoriteFragment"
         android:name="com.example.shopverse.presentation.favorite.FavoriteFragment"
         android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite" />
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_itemFragment"
+            app:destination="@id/itemFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.shopverse.presentation.profile.ProfileFragment"

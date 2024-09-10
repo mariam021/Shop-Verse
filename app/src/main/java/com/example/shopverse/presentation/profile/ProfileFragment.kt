@@ -6,13 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import com.example.shopverse.R
 import com.example.shopverse.data.local.user.UserDatabase
 import com.example.shopverse.databinding.FragmentProfileBinding
-import com.example.shopverse.presentation.EnteryActivity
+import com.example.shopverse.presentation.entry.EnteryActivity
 import com.example.shopverse.presentation.NavigationDestination
-import com.example.shopverse.presentation.login.LoginFragment
 
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
@@ -26,47 +23,42 @@ class ProfileFragment : Fragment() {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val userDao = UserDatabase.getUserDatabase(requireContext()).userDao()
         val viewModelFactory = ProfileViewModelFactory(requireContext())
         viewModel = ViewModelProvider(this, viewModelFactory).get(ProfileVM::class.java)
         viewModel.loadUser()
-
 
         viewModel.user.observe(viewLifecycleOwner) { user ->
             binding.email.text = user?.email.toString()
             binding.userName.text = user?.userName.toString()
             binding.userPhone.text = user?.phone.toString()
             binding.userPassword.text = user?.password.toString()
-
         }
+
         binding.btnSignOut.setOnClickListener {
-            logoutUser()
+            signOutUser()
         }
-
     }
-    private fun logoutUser() {
+
+    private fun signOutUser() {
+        // Log the user out by updating the isLoggedIn status to false
+        viewModel.logoutUser()
+
+        // Pass the navigation source and start the entry activity
         val bundle = Bundle().apply {
             putSerializable("navigationSource", NavigationDestination.ProfileFragment)
         }
         val intent = Intent(requireActivity(), EnteryActivity::class.java).apply {
             putExtras(bundle)
         }
-
         startActivity(intent)
+        requireActivity().finish() // Optional: finish the current activity to prevent going back to it
     }
 
-    override fun onDestroy() {
-            super.onDestroy()
-            _binding = null
-        }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
-
-
-
-
-
-
-
-

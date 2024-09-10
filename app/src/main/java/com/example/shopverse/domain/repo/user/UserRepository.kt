@@ -35,4 +35,8 @@ class UserRepository(private val userDao: UserDao) {
     suspend fun updateUser(user: User) {
         userDao.updateUser(user)
     }
+
+    suspend fun setUserLoggedInStatus(email: String, isLoggedIn: Boolean) {
+        userDao.setUserLoggedInStatus(email, isLoggedIn)
+    }
 }
