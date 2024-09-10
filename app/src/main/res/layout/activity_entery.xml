@@ -7,7 +7,7 @@
     android:id="@+id/entry_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.EnteryActivity">
+    tools:context=".presentation.entry.EnteryActivity">
 
     <!-- NavHostFragment for hosting the navigation -->
     <androidx.fragment.app.FragmentContainerView

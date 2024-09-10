@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import com.example.shopverse.R
 import com.example.shopverse.data.local.product.Product
 
-class FavAdapter(var favList: List<Product>, private val onRemoveClick: (Product) -> Unit): RecyclerView.Adapter<FavAdapter.FavViewHolder>() {
+class FavAdapter(var favList: List<Product>, private val onRemoveClick: (Product) -> Unit, private val onItemClick: (Product) -> Unit): RecyclerView.Adapter<FavAdapter.FavViewHolder>() {
     inner class FavViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val productName: TextView = itemView.findViewById(R.id.productNameTextView)
         val productPrice: TextView = itemView.findViewById(R.id.productPriceTextView)
@@ -51,6 +51,10 @@ class FavAdapter(var favList: List<Product>, private val onRemoveClick: (Product
             }
             notifyItemRemoved(position)
             notifyItemRangeChanged(position, favList.size)  // To rebind remaining items if needed
+        }
+
+        holder.itemView.setOnClickListener {
+            onItemClick(favItem)
         }
     }
 

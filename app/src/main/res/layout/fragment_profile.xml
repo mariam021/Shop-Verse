@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="username"
-                    android:textColor="@color/primary_100" />
+                    android:textColor="@color/primary_800" />
             </LinearLayout>
 
             <!-- Row for Phone and User Phone -->
@@ -95,7 +95,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_weight="1"
                     android:text="user phone"
-                    android:textColor="@color/primary_100" />
+                    android:textColor="@color/primary_800" />
             </LinearLayout>
 
             <!-- Row for Email and User Email -->
@@ -123,7 +123,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_weight="1"
                     android:text="user email"
-                    android:textColor="@color/primary_100" />
+                    android:textColor="@color/primary_800" />
             </LinearLayout>
 
             <!-- Row for Password and User Password -->
@@ -149,7 +149,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_weight="1"
                     android:text="user password"
-                    android:textColor="@color/primary_100" />
+                    android:textColor="@color/primary_800" />
             </LinearLayout>
 
         </LinearLayout>
@@ -164,7 +164,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_button_active"
-        android:text="sign out"
+        android:text="@string/log_out"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cardViewInfo"

@@ -10,13 +10,17 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.shopverse.R
+import com.example.shopverse.data.local.user.UserDatabase
 import com.example.shopverse.databinding.FragmentLogInBinding
 import com.example.shopverse.databinding.FragmentSignUpBinding
+import com.example.shopverse.domain.repo.user.UserRepository
+import com.example.shopverse.presentation.entry.EntryVM
+import com.example.shopverse.presentation.entry.EntryVMFactory
 import com.example.shopverse.presentation.main.MainActivity
 
 class LoginFragment : Fragment() {
-    var _binding: FragmentLogInBinding? = null
-    val binding get() = _binding!!
+    private var _binding: FragmentLogInBinding? = null
+    private val binding get() = _binding!!
     private lateinit var viewModel: LoginFragmentVM
 
     override fun onCreateView(
@@ -42,7 +46,6 @@ class LoginFragment : Fragment() {
     }
 
     private fun setupListeners() {
-
         binding.btnLogin.setOnClickListener {
             val email = binding.textFieldEmailLogin.editText?.text.toString()
             val password = binding.textFieldPasswordLogin.editText?.text.toString()
@@ -57,8 +60,11 @@ class LoginFragment : Fragment() {
     private fun observeViewModel() {
         viewModel.loginResult.observe(viewLifecycleOwner) { isSuccess ->
             if (isSuccess) {
+                // Navigate to MainActivity if login is successful
                 val intent = Intent(requireActivity(), MainActivity::class.java)
+                Toast.makeText(requireContext(), "Logged in successfully", Toast.LENGTH_SHORT).show()
                 startActivity(intent)
+                requireActivity().finish()
             } else {
                 Toast.makeText(requireContext(), R.string.login_failed, Toast.LENGTH_SHORT).show()
             }

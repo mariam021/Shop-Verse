@@ -7,11 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.shopverse.data.local.product.ProductDatabase
 import com.example.shopverse.databinding.FragmentFavoriteBinding
 import com.example.shopverse.databinding.FragmentItemBinding
 import com.example.shopverse.domain.repo.product.ProductRepository
+import com.example.shopverse.presentation.home.HomeFragmentDirections
 import com.example.shopverse.presentation.home.HomeVM
 
 
@@ -42,6 +44,22 @@ class FavoriteFragment : Fragment() {
         favAdapter = FavAdapter(emptyList(),
             onRemoveClick = { product ->
                 favVM.removeProductFromFavorites(product)
+            },
+            onItemClick = { product ->
+                val action = FavoriteFragmentDirections.actionFavoriteFragmentToItemFragment(
+                    images = product.images.toTypedArray(),
+                    title = product.title,
+                    description = product.description,
+                    category = product.category,
+                    availabilityStatus = product.availabilityStatus,
+                    discountPercentage = product.discountPercentage.toFloat(),
+                    price = product.price.toFloat(),
+                    warrantyInformation = product.warrantyInformation,
+                    stock = product.stock,
+                    rating = product.rating.toFloat(),
+                    weight = product.weight
+                )
+                findNavController().navigate(action)
             }
         )
 

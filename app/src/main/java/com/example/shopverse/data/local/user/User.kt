@@ -10,5 +10,5 @@ data class User(
     val password: String,
     val userName: String,
     val phone: String,
-    val isLoggedIn: Boolean = true
+    val isLoggedIn: Boolean = false
 )
