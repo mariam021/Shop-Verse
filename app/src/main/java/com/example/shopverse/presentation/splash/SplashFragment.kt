@@ -12,11 +12,16 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.shopverse.R
+import com.example.shopverse.data.local.user.UserDatabase
 import com.example.shopverse.databinding.FragmentLogInBinding
 import com.example.shopverse.databinding.FragmentSplashBinding
+import com.example.shopverse.presentation.NavigationDestination
+import com.example.shopverse.presentation.NavigationDestination.*
 import com.example.shopverse.presentation.main.MainActivity
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SplashFragment : Fragment() {
     var _binding: FragmentSplashBinding? = null
@@ -34,32 +39,8 @@ class SplashFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val sharedPreferences = requireContext().getSharedPreferences("shopverse_prefs", Context.MODE_PRIVATE)
-        val isFirstLaunch = sharedPreferences.getBoolean("isFirstLaunch", true)
 
-        lifecycleScope.launch {
-            delay(1200)
-            if (isFirstLaunch) {
-                // Navigate to the welcome screen
-                findNavController().navigate(R.id.action_splashFragment_to_welcomeFragment)
-            } else {
-                viewModel.isLoggedIn.observe(viewLifecycleOwner) { isLoggedIn ->
-                    if (isLoggedIn) {
-                        Toast.makeText(requireContext(), "loggedIn", Toast.LENGTH_SHORT).show()
-                        // Navigate to the home fragment
-                        val intent = Intent(requireActivity(), MainActivity::class.java)
-                        startActivity(intent)
-                    } else {
-                        // Navigate to the login fragment
-                        findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
-                    }
-                }
-
-                viewModel.checkLoginStatus()
-            }
-        }
     }
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
