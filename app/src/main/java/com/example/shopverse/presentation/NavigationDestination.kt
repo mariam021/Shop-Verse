@@ -6,6 +6,6 @@ enum class NavigationDestination {
     FavouriteFragment,
     ProfileFragment,
     WelcomeFragment,
-    OTHER
+    SplashFragment
 
 }

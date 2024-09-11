@@ -32,8 +32,8 @@
 
     <ImageView
         android:id="@+id/img_empty_fav"
-        android:layout_width="280dp"
-        android:layout_height="280dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="200dp"
         android:src="@drawable/location"

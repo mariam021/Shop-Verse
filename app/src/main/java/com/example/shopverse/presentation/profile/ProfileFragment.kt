@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.example.shopverse.data.local.user.UserDatabase
 import com.example.shopverse.databinding.FragmentProfileBinding
 import com.example.shopverse.presentation.entry.EnteryActivity
 import com.example.shopverse.presentation.NavigationDestination
@@ -27,7 +26,7 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val viewModelFactory = ProfileViewModelFactory(requireContext())
-        viewModel = ViewModelProvider(this, viewModelFactory).get(ProfileVM::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory)[ProfileVM::class.java]
         viewModel.loadUser()
 
         viewModel.user.observe(viewLifecycleOwner) { user ->
@@ -54,7 +53,7 @@ class ProfileFragment : Fragment() {
             putExtras(bundle)
         }
         startActivity(intent)
-        requireActivity().finish() // Optional: finish the current activity to prevent going back to it
+        requireActivity().finish()
     }
 
     override fun onDestroyView() {

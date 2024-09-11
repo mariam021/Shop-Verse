@@ -2,8 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context="com.example.shopverse.presentation.signup.SignUpFragment">
 
     <ScrollView
@@ -62,10 +60,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="34dp"
-                    app:helperText="@string/required"
-                    app:helperTextTextColor="@android:color/holo_red_dark"
                     app:counterMaxLength="40"
                     app:endIconMode="clear_text"
+                    app:helperText="@string/required"
+                    app:helperTextTextColor="@android:color/holo_red_dark"
                     app:layout_constraintTop_toBottomOf="@id/textViewSubHeaderSignUp"
                     app:startIconDrawable="@drawable/ic_email">
 
@@ -74,9 +72,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="Email Address"
-                        android:lines="1"
                         android:inputType="textEmailAddress"
-                        />
+                        android:lines="1" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -84,10 +81,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    app:helperText="@string/required"
-                    app:helperTextTextColor="@android:color/holo_red_dark"
                     app:counterMaxLength="15"
                     app:endIconMode="clear_text"
+                    app:helperText="@string/required"
+                    app:helperTextTextColor="@android:color/holo_red_dark"
                     app:layout_constraintTop_toBottomOf="@id/textFieldEmailRegister"
                     app:startIconDrawable="@drawable/baseline_person_24">
 
@@ -95,8 +92,8 @@
                         android:id="@+id/et_user_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:lines="1"
-                        android:hint="User Name" />
+                        android:hint="User Name"
+                        android:lines="1" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -104,11 +101,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
+                    app:counterEnabled="true"
                     app:counterMaxLength="16"
+                    app:errorEnabled="true"
                     app:helperText="@string/required"
                     app:helperTextTextColor="@android:color/holo_red_dark"
-                    app:errorEnabled="true"
-                    app:counterEnabled="true"
                     app:layout_constraintTop_toBottomOf="@id/textFieldUsername"
                     app:passwordToggleEnabled="true"
                     app:startIconDrawable="@drawable/ic_password">
@@ -118,9 +115,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Password"
+                        android:inputType="textPassword"
                         android:lines="1"
-                        android:maxLength="16"
-                        android:inputType="textPassword" />
+                        android:maxLength="16" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -128,11 +125,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"
-                    app:helperText="@string/required"
-                    app:helperTextTextColor="@android:color/holo_red_dark"
                     app:counterEnabled="true"
                     app:counterMaxLength="11"
                     app:errorEnabled="true"
+                    app:helperText="@string/required"
+                    app:helperTextTextColor="@android:color/holo_red_dark"
                     app:layout_constraintTop_toBottomOf="@id/textFieldPasswordRegister"
                     app:startIconDrawable="@drawable/ic_phone">
 

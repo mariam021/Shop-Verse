@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -38,12 +39,16 @@ class LoginFragment : Fragment() {
 
         setupListeners()
         observeViewModel()
+        requireActivity().onBackPressedDispatcher.addCallback(){
+            requireActivity().finish()
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
+
 
     private fun setupListeners() {
         binding.btnLogin.setOnClickListener {
