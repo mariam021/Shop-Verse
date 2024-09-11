@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -43,7 +44,19 @@ class FavoriteFragment : Fragment() {
 
         favAdapter = FavAdapter(emptyList(),
             onRemoveClick = { product ->
-                favVM.removeProductFromFavorites(product)
+                AlertDialog.Builder(requireContext())
+                    .setTitle("Confirm Removal")
+                    .setMessage("Are you sure you want to remove this item from your favorites?")
+                    .setPositiveButton("Delete") { _, _ ->
+                        favVM.removeProductFromFavorites(product)
+                        favAdapter.updateProducts(favAdapter.favList.filter { it.id != product.id })
+                        if (favAdapter.favList.isEmpty()) {
+                            binding.imgEmptyFav.visibility = View.VISIBLE
+                            binding.rvFav.visibility = View.GONE
+                        }
+                    }
+                    .setNegativeButton("Cancel", null)
+                    .show()
             },
             onItemClick = { product ->
                 val action = FavoriteFragmentDirections.actionFavoriteFragmentToItemFragment(
@@ -80,5 +93,4 @@ class FavoriteFragment : Fragment() {
         super.onDestroy()
         _binding = null
     }
-
 }

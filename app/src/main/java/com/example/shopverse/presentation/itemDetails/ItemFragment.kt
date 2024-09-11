@@ -44,7 +44,6 @@ class ItemFragment : Fragment() {
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = imageAdapter
         }
-
     }
 
     override fun onDestroy() {

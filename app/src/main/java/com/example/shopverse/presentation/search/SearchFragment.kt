@@ -30,7 +30,6 @@ class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -94,7 +93,7 @@ class SearchFragment : Fragment() {
     }
 
 
-    private var isNoDataToastShown = false // Flag to control "No Data found" toast
+    private var isNoDataToastShown = false
 
     private fun filterList(query: String?) {
         val productList = viewModel.products.value ?: emptyList()
@@ -109,7 +108,7 @@ class SearchFragment : Fragment() {
                 Toast.makeText(requireContext(), "Please enter a valid search query", Toast.LENGTH_SHORT).show()
                 isNoDataToastShown = true
             }
-            return // Exit the function as no further processing is needed
+            return
         }
 
         if (productList.isNotEmpty()) {

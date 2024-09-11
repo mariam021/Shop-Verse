@@ -7,7 +7,6 @@
     android:background="@color/primary_100"
     tools:context=".presentation.home.HomeFragment">
 
-    <!-- Container for Welcome Text -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
@@ -36,7 +35,7 @@
                 android:id="@+id/tv_welcome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Welcome "
+                android:text="@string/welcome"
                 android:textColor="@android:color/white"
                 android:textSize="32sp"
                 android:textStyle="bold" />
@@ -46,10 +45,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="username"
                 android:textColor="@color/primary_800"
                 android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:text="@string/username" />
         </LinearLayout>
 
         <TextView
@@ -57,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="-32dp"
-            android:text="Check Out Amazing Products"
+            android:text="@string/check_out_amazing_products"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -67,22 +66,19 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    <!-- TextView for Popular Products -->
     <TextView
         android:id="@+id/tv_popular_products"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center_horizontal"
-        android:text="Popular Products"
+        android:text="@string/popular_products"
         android:textColor="@color/primary_800"
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/container" />
 
-    <!-- RecyclerView for Product List -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
@@ -100,6 +96,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
+        android:contentDescription="@string/place_holder"
         android:src="@drawable/search"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

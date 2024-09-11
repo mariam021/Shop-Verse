@@ -37,7 +37,6 @@ class SearchAdapter(var products: List<Product>, private val onItemClick: (Produ
             .load(product.thumbnail)
             .into(holder.logo)
 
-        // holder.logo.setImageResource(product.images[0])
         holder.titleTv.text = product.title
 
         holder.itemView.setOnClickListener {

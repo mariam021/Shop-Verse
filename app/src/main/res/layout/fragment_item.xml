@@ -66,26 +66,25 @@
                     android:id="@+id/icon_details_star"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="star_icon"
+                    android:contentDescription="@string/star_icon"
                     android:src="@drawable/ic_star" />
 
             </LinearLayout>
 
 
-            <!-- Horizontal Linear Layout 1 -->
             <LinearLayout
                 android:id="@+id/container1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="28dp"
+                android:baselineAligned="false"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/container_rating">
 
-                <!-- Vertical Layout for Product Price, Stock, Weight, and Warranty -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -93,7 +92,6 @@
                     android:gravity="center_vertical"
                     android:orientation="vertical">
 
-                    <!-- Icon and Text for Product Price -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -107,6 +105,7 @@
                             android:id="@+id/icon_details_price"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:contentDescription="@string/product_price"
                             android:src="@drawable/price_tag" />
 
                         <TextView
@@ -119,7 +118,6 @@
                             tools:text="product price" />
                     </LinearLayout>
 
-                    <!-- Icon and Text for Product Stock -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -133,6 +131,7 @@
                             android:id="@+id/icon_details_stock"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:contentDescription="@string/product_stock"
                             android:src="@drawable/ic_stock" />
 
                         <TextView
@@ -145,7 +144,6 @@
                             tools:text="product stock" />
                     </LinearLayout>
 
-                    <!-- Icon and Text for Product Weight -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -159,6 +157,7 @@
                             android:id="@+id/icon_details_weight"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:contentDescription="@string/product_weight"
                             android:src="@drawable/ic_weight" />
 
                         <TextView
@@ -171,7 +170,6 @@
                             tools:text="product weight" />
                     </LinearLayout>
 
-                    <!-- Icon and Text for Warranty Information -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -185,6 +183,7 @@
                             android:id="@+id/icon_details_warranty"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:contentDescription="@string/warranty_information"
                             android:src="@drawable/ic_warning" />
 
                         <TextView
@@ -199,7 +198,6 @@
 
                 </LinearLayout>
 
-                <!-- Vertical Layout for Product Discount, Category, and Availability -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -207,7 +205,6 @@
                     android:gravity="center_vertical"
                     android:orientation="vertical">
 
-                    <!-- Icon and Text for Product Discount -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -221,6 +218,7 @@
                             android:id="@+id/icon_details_discount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:contentDescription="@string/product_discount"
                             android:src="@drawable/ic_discount" />
 
                         <TextView
@@ -233,7 +231,6 @@
                             tools:text="product discount" />
                     </LinearLayout>
 
-                    <!-- Icon and Text for Product Category -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -247,6 +244,7 @@
                             android:id="@+id/icon_details_category"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:contentDescription="@string/product_category"
                             android:src="@drawable/ic_category" />
 
                         <TextView
@@ -259,7 +257,6 @@
                             tools:text="product category" />
                     </LinearLayout>
 
-                    <!-- Icon and Text for Availability Status -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -273,6 +270,7 @@
                             android:id="@+id/icon_details_available"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:contentDescription="@string/availability_status"
                             android:src="@drawable/ic_available" />
 
                         <TextView
@@ -286,7 +284,6 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_details_description"
@@ -309,10 +306,10 @@
                     android:layout_marginTop="8dp"
                     android:gravity="center"
                     android:padding="16dp"
+                    android:text="@string/description_of_product"
                     android:textColor="@color/primary_800"
                     android:textSize="18sp"
-                    tools:text="Description of product"
-                    android:text="Description of product"/>
+                    tools:text="Description of product" />
 
                 <TextView
                     android:id="@+id/tv_details_description"
@@ -321,13 +318,11 @@
                     android:layout_marginTop="55dp"
                     android:gravity="center"
                     android:padding="16dp"
-                    android:text="This is the content inside the CardView."
+                    android:text="@string/this_is_the_content_inside_the_cardview"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     tools:text="This is the content inside the CardView." />
             </androidx.cardview.widget.CardView>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

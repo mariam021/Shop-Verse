@@ -1,4 +1,4 @@
-package com.example.shopverse.presentation
+package com.example.shopverse.presentation.entry
 
 enum class NavigationDestination {
     LoginFragment,
@@ -7,5 +7,4 @@ enum class NavigationDestination {
     ProfileFragment,
     WelcomeFragment,
     SplashFragment
-
 }

@@ -14,10 +14,4 @@ class SplashFragmentVM(context: Context) : ViewModel() {
     private val _isLoggedIn = MutableLiveData<Boolean>()
     val isLoggedIn: LiveData<Boolean> get() = _isLoggedIn
 
-    fun checkLoginStatus() {
-        viewModelScope.launch {
-            val user = userRepository.getLoggedInUser() // Fetch the logged-in user
-            _isLoggedIn.value = user != null // If user exists, set isLoggedIn to true, otherwise false
-        }
-    }
 }

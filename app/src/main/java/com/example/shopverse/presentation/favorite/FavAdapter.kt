@@ -46,13 +46,6 @@ class FavAdapter(var favList: List<Product>, private val onRemoveClick: (Product
 
         holder.productRemove.setOnClickListener {
             onRemoveClick(favItem)
-
-            // Remove the item from the list and notify the adapter
-            favList = favList.toMutableList().apply {
-                removeAt(position)
-            }
-            notifyItemRemoved(position)
-            notifyItemRangeChanged(position, favList.size)  // To rebind remaining items if needed
         }
 
         holder.itemView.setOnClickListener {
