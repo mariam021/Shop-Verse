@@ -50,7 +50,8 @@ class SearchFragment : Fragment() {
 
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        // Initialize searchAdapter with an empty list or initial data
+        binding.recyclerView.visibility = View.GONE
+
         searchAdapter = SearchAdapter(emptyList(),
             onItemClick = { product ->
                 val action = SearchFragmentDirections.actionSearchFragmentToItemFragment(
@@ -70,14 +71,10 @@ class SearchFragment : Fragment() {
             }
         )
 
-        viewModel.products.observe(viewLifecycleOwner) { products ->
-            if (products.isNullOrEmpty()) {
-                binding.emptyStateContainer.visibility = View.VISIBLE
+        binding.emptyStateContainer.visibility = View.VISIBLE
 
-            } else {
-                binding.emptyStateContainer.visibility = View.GONE
-                searchAdapter.setFilteredList(products)
-            }
+        viewModel.products.observe(viewLifecycleOwner) { products ->
+            searchAdapter.setFilteredList(products)
         }
 
         binding.recyclerView.adapter = searchAdapter
@@ -91,33 +88,63 @@ class SearchFragment : Fragment() {
                 filterList(newText)
                 return true
             }
-
         })
+
         viewModel.fetchProducts()
     }
+
+
+    private var isNoDataToastShown = false // Flag to control "No Data found" toast
 
     private fun filterList(query: String?) {
         val productList = viewModel.products.value ?: emptyList()
 
-        if (query != null && productList.isNotEmpty()) {
+        val trimmedQuery = query?.trim()
+
+        if (trimmedQuery.isNullOrEmpty()) {
+            binding.recyclerView.visibility = View.GONE
+            binding.emptyStateContainer.visibility = View.VISIBLE
+
+            if (!isNoDataToastShown) {
+                Toast.makeText(requireContext(), "Please enter a valid search query", Toast.LENGTH_SHORT).show()
+                isNoDataToastShown = true
+            }
+            return // Exit the function as no further processing is needed
+        }
+
+        if (productList.isNotEmpty()) {
             val filteredList = productList.filter {
-                it.title.lowercase(Locale.ROOT).contains(query.lowercase(Locale.ROOT))
+                it.title.lowercase(Locale.ROOT).contains(trimmedQuery.lowercase(Locale.ROOT))
             }
 
             if (filteredList.isEmpty()) {
-                Toast.makeText(requireContext(), "No Data found", Toast.LENGTH_SHORT).show()
+                binding.recyclerView.visibility = View.GONE
+                binding.emptyStateContainer.visibility = View.VISIBLE
+
+                if (!isNoDataToastShown) {
+                    Toast.makeText(requireContext(), "No product found", Toast.LENGTH_SHORT).show()
+                    isNoDataToastShown = true
+                }
             } else {
                 searchAdapter.setFilteredList(filteredList)
+                binding.recyclerView.visibility = View.VISIBLE
+                binding.emptyStateContainer.visibility = View.GONE
+                isNoDataToastShown = false
             }
         } else {
-            Toast.makeText(
-                requireContext(),
-                "No products available or invalid query",
-                Toast.LENGTH_SHORT
-            ).show()
+            binding.recyclerView.visibility = View.GONE
+            binding.emptyStateContainer.visibility = View.VISIBLE
+
+            if (!isNoDataToastShown) {
+                Toast.makeText(
+                    requireContext(),
+                    "No products available or invalid query",
+                    Toast.LENGTH_SHORT
+                ).show()
+                isNoDataToastShown = true
+            }
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

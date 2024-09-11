@@ -150,7 +150,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/rounded_button_background"
-                    android:text="Register"
+                    android:text="Sign Up"
                     android:textAllCaps="false"
                     android:textColor="@color/primary_100"
                     android:textSize="18sp"

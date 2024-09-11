@@ -37,7 +37,7 @@ class VerticalHomeAdapter(
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = products[position]
         holder.productName.text = product.title
-        holder.productPrice.text = "$${product.price}"
+        holder.productPrice.text = "${product.price}$"
         holder.productRate.text = product.rating.toString()
         //holder.productRate.text = product.rating.toString()
 

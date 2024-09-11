@@ -1,5 +1,6 @@
 package com.example.shopverse.presentation.favorite
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,11 +33,12 @@ class FavAdapter(var favList: List<Product>, private val onRemoveClick: (Product
         return FavViewHolder(view)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: FavAdapter.FavViewHolder, position: Int) {
         val favItem = favList[position]
 
         holder.productName.text = favItem.title
-        holder.productPrice.text = favItem.price.toString()
+        holder.productPrice.text = "${favItem.price}$"
         holder.productStock.text = favItem.stock.toString()
         Glide.with(holder.itemView.context)
             .load(favItem.thumbnail)
