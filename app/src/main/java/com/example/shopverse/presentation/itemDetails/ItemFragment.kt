@@ -32,7 +32,7 @@ class ItemFragment : Fragment() {
         binding.tvDetailsCategory.text = args.category
         binding.tvDetailsAvailabilityStatus.text = args.availabilityStatus
         binding.tvDetailsDiscountPercentage.text = args.discountPercentage.toString()
-        binding.tvDetailsPrice.text = args.price.toString()
+        binding.tvDetailsPrice.text = "${args.price}$"
         binding.tvDetailsWarrantyInformation.text = args.warrantyInformation
         binding.tvDetailsStock.text = args.stock.toString()
         binding.tvDetailsRating.text = args.rating.toString()
@@ -40,7 +40,8 @@ class ItemFragment : Fragment() {
 
         val imageAdapter = HorizontalItemAdapter(args.images.toList())
         binding.rvDetailsImages.apply {
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = imageAdapter
         }
 

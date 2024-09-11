@@ -11,6 +11,7 @@ import com.example.shopverse.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainVM by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -22,7 +23,15 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigation.setupWithNavController(navController)
 
-        viewModel.setNavController(navController)
+        // Set up destination changed listener to handle bottom navigation item selection
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.homeFragment -> binding.bottomNavigation.menu.findItem(R.id.home).isChecked = true
+                R.id.searchFragment -> binding.bottomNavigation.menu.findItem(R.id.search).isChecked = true
+                R.id.favoriteFragment -> binding.bottomNavigation.menu.findItem(R.id.fav).isChecked = true
+                R.id.profileFragment -> binding.bottomNavigation.menu.findItem(R.id.profile).isChecked = true
+            }
+        }
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
