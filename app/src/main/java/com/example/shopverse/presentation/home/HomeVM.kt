@@ -17,7 +17,6 @@ class HomeVM(
 
     private val _products = MutableLiveData<List<Product>>()
     val products: LiveData<List<Product>> get() = _products
-
     private val _loggedInUserName = MutableLiveData<String?>()
     val loggedInUserName: LiveData<String?> get() = _loggedInUserName
 

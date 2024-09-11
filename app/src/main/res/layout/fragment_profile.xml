@@ -10,12 +10,13 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/primary_100">
-
+        android:background="@color/primary_100"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/primary_100">
 
             <ImageView
@@ -23,14 +24,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:layout_marginTop="64dp"
+                android:contentDescription="@string/logo"
                 android:src="@drawable/ic_logo"
                 app:layout_constraintBottom_toTopOf="@+id/cardViewInfo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-
-                />
-
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardViewInfo"
@@ -54,7 +53,6 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <!-- Row for Name and Username -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -67,7 +65,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:drawablePadding="4dp"
-                            android:text="User name"
+                            android:text="@string/user_name"
                             app:drawableStartCompat="@drawable/ic_name" />
 
                         <TextView
@@ -76,11 +74,10 @@
 
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="username"
-                            android:textColor="@color/primary_800" />
+                            android:textColor="@color/primary_800"
+                            tools:text="username" />
                     </LinearLayout>
 
-                    <!-- Row for Phone and User Phone -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -94,21 +91,19 @@
                             android:layout_marginTop="16dp"
                             android:layout_weight="1"
                             android:drawablePadding="4dp"
-                            android:text="phone"
-                            app:drawableStartCompat="@drawable/phone_ic" />
+                            app:drawableStartCompat="@drawable/phone_ic"
+                            tools:text="phone" />
 
                         <TextView
                             android:id="@+id/userPhone"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-
                             android:layout_marginTop="16dp"
                             android:layout_weight="1"
-                            android:text="user phone"
-                            android:textColor="@color/primary_800" />
+                            android:textColor="@color/primary_800"
+                            tools:text="user phone" />
                     </LinearLayout>
 
-                    <!-- Row for Email and User Email -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -122,21 +117,19 @@
                             android:layout_marginTop="16dp"
                             android:layout_weight="1"
                             android:drawablePadding="4dp"
-                            android:text="email"
-                            app:drawableStartCompat="@drawable/ic_pemail" />
+                            app:drawableStartCompat="@drawable/ic_pemail"
+                            tools:text="email" />
 
                         <TextView
                             android:id="@+id/email"
                             android:layout_width="0dp"
-
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
                             android:layout_weight="1"
-                            android:text="user email"
-                            android:textColor="@color/primary_800" />
+                            android:textColor="@color/primary_800"
+                            tools:text="user email" />
                     </LinearLayout>
 
-                    <!-- Row for Password and User Password -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -149,8 +142,8 @@
                             android:layout_marginTop="16dp"
                             android:layout_weight="1"
                             android:drawablePadding="4dp"
-                            android:text="password"
-                            app:drawableStartCompat="@drawable/password_ic" />
+                            app:drawableStartCompat="@drawable/password_ic"
+                            tools:text="password" />
 
                         <TextView
                             android:id="@+id/userPassword"
@@ -158,8 +151,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
                             android:layout_weight="1"
-                            android:text="user password"
-                            android:textColor="@color/primary_800" />
+                            android:textColor="@color/primary_800"
+                            tools:text="user password" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -176,8 +169,8 @@
                 android:layout_marginBottom="95dp"
                 android:background="@drawable/rounded_button_active"
                 android:text="@string/log_out"
-                android:textColor="@color/white"
                 android:textAllCaps="false"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

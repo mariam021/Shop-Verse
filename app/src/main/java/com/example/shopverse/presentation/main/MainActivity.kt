@@ -16,14 +16,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.frag_container) as NavHostFragment
         val navController = navHostFragment.navController
-
+        viewModel.setNavController(navController)
         binding.bottomNavigation.setupWithNavController(navController)
-
-        // Set up destination changed listener to handle bottom navigation item selection
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.homeFragment -> binding.bottomNavigation.menu.findItem(R.id.home).isChecked = true
@@ -35,10 +32,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.home -> navController.navigate(R.id.homeFragment)
-                R.id.search -> navController.navigate(R.id.searchFragment)
-                R.id.fav -> navController.navigate(R.id.favoriteFragment)
-                R.id.profile -> navController.navigate(R.id.profileFragment)
+                R.id.home -> viewModel.navigateToHome()
+                R.id.search -> viewModel.navigateToSearch()
+                R.id.fav -> viewModel.navigateToFavorites()
+                R.id.profile -> viewModel.navigateToProfile()
             }
             true
         }

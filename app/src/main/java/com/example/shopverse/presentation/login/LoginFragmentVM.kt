@@ -19,7 +19,6 @@ class LoginFragmentVM(context: Context) : ViewModel() {
             val user = userRepository.getUserByEmail(email)
             _loginResult.value = user?.let { it.password == password } ?: false
 
-            // If login is successful, set the isLoggedIn status to true
             if (_loginResult.value == true) {
                 userRepository.setUserLoggedInStatus(email, true)
             }

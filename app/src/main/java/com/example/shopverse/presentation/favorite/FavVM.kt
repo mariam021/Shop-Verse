@@ -21,7 +21,6 @@ class FavVM(private val repository: ProductRepository) : ViewModel() {
     fun removeProductFromFavorites(product: Product) {
         viewModelScope.launch {
             repository.removeProductFromFavorites(product)
-            // After removal, fetch the updated list and post it to the LiveData
             _products.value = repository.getFavoriteProducts()
         }
     }

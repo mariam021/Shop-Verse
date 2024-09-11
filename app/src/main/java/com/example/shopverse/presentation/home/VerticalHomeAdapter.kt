@@ -39,22 +39,19 @@ class VerticalHomeAdapter(
         holder.productName.text = product.title
         holder.productPrice.text = "${product.price}$"
         holder.productRate.text = product.rating.toString()
-        //holder.productRate.text = product.rating.toString()
 
-        // Load the product image using Glide or any image loading library
         Glide.with(holder.itemView.context)
             .load(product.thumbnail)
+            .placeholder(R.drawable.error_placeholder)
+            .error(R.drawable.error_placeholder)
             .into(holder.productImage)
 
-        // Update the heart icon based on the isFavorite status
         holder.favoriteButton.setImageResource(
             if (product.isFavorite) R.drawable.ic_heart_filled else R.drawable.ic_heart_outline_
         )
 
-        // Handle favorite button click
         holder.favoriteButton.setOnClickListener {
             onFavoriteClick(product)
-            // Update the heart icon immediately after the click
             notifyItemChanged(position)
         }
 
