@@ -17,9 +17,9 @@ class EntryVM(private val userRepository: UserRepository) : ViewModel() {
     val loggedInUser: LiveData<User?> get() = _loggedInUser
 
     // Function to check if a user exists and their isLoggedIn status
-    suspend fun getUserWithLoginStatus(): User? {
+    suspend fun getUserWithLoginStatus(): User {
         return withContext(Dispatchers.IO) {
-            val user = userRepository.getLoggedInUser()
+            val user = userRepository.getUser()
             _loggedInUser.postValue(user)
             user
         }

@@ -15,10 +15,8 @@ import com.example.shopverse.presentation.NavigationDestination
 import com.example.shopverse.presentation.NavigationDestination.*
 import com.example.shopverse.presentation.main.MainActivity
 import com.example.shopverse.presentation.splash.SplashFragmentDirections
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 class EnteryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEnteryBinding
     private lateinit var navController: NavController
@@ -38,8 +36,12 @@ class EnteryActivity : AppCompatActivity() {
         entryVM = ViewModelProvider(this, EntryVMFactory(userRepository))[EntryVM::class.java]
 
         lifecycleScope.launch {
-            val destination = intent.getSerializableExtra("navigationSource") as? NavigationDestination
-                ?: OTHER
+            val destination = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+                intent.getSerializableExtra("navigationSource", NavigationDestination::class.java) ?: SplashFragment
+            } else {
+                @Suppress("DEPRECATION")
+                intent.getSerializableExtra("navigationSource") as? NavigationDestination ?: SplashFragment
+            }
 
             delay(1200)
 
@@ -49,23 +51,14 @@ class EnteryActivity : AppCompatActivity() {
 
     // Function to handle navigation based on the destination
     private suspend fun navigateBasedOnSource(destination: NavigationDestination) {
+        val user = entryVM.getUserWithLoginStatus()
         when (destination) {
             ProfileFragment -> {
                 val action = SplashFragmentDirections.actionSplashFragmentToLoginFragment()
                 navController.navigate(action)
             }
-            WelcomeFragment -> {
-                // Handle navigation to WelcomeFragment
-            }
-            LoginFragment -> {
-                val action = SplashFragmentDirections.actionSplashFragmentToLoginFragment()
-                navController.navigate(action)
-            }
-            HomeFragment -> {
-                // Handle navigation to HomeFragment
-            }
-            OTHER -> {
-                val user = entryVM.getUserWithLoginStatus() // Use ViewModel to get user and login status
+            SplashFragment -> {
+                 // Use ViewModel to get user and login status
                 if (user != null) {
                     if (user.isLoggedIn) {
                         // Navigate to MainActivity if the user is logged in
@@ -83,12 +76,11 @@ class EnteryActivity : AppCompatActivity() {
                     navController.navigate(action)
                 }
             }
-            FavouriteFragment -> {
-                // TODO: Handle navigation to FavouriteFragment when needed
-            }
+
 
             else -> {
                 // Default or other cases if necessary
+
             }
         }
     }
