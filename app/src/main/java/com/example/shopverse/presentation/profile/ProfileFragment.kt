@@ -1,4 +1,5 @@
 package com.example.shopverse.presentation.profile
+
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -34,7 +35,8 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         userRepository = UserRepository(UserDatabase.getUserDatabase(requireContext()).userDao())
-        productRepository = ProductRepository(ProductDatabase.getProductDatabase(requireContext()).productDao())
+        productRepository =
+            ProductRepository(ProductDatabase.getProductDatabase(requireContext()).productDao())
         val viewModelFactory = ProfileViewModelFactory(requireContext())
         viewModel = ViewModelProvider(this, viewModelFactory)[ProfileVM::class.java]
         viewModel.loadUser()
@@ -53,22 +55,20 @@ class ProfileFragment : Fragment() {
 
     private fun signOutUser() {
         lifecycleScope.launch {
-            lifecycleScope.launch {
-                productRepository.deleteAllProducts()
-                val userEmail = viewModel.user.value?.email
-                if (userEmail != null) {
-                    userRepository.deleteUser(userEmail)
-                }
-                viewModel.logoutUser()
-                val bundle = Bundle().apply {
-                    putSerializable("navigationSource", NavigationDestination.ProfileFragment)
-                }
-                val intent = Intent(requireActivity(), EnteryActivity::class.java).apply {
-                    putExtras(bundle)
-                }
-                startActivity(intent)
-                requireActivity().finish()
+            productRepository.deleteAllProducts()
+            val userEmail = viewModel.user.value?.email
+            if (userEmail != null) {
+                userRepository.deleteUser(userEmail)
             }
+            //viewModel.logoutUser()
+            val bundle = Bundle().apply {
+                putSerializable("navigationSource", NavigationDestination.ProfileFragment)
+            }
+            val intent = Intent(requireActivity(), EnteryActivity::class.java).apply {
+                putExtras(bundle)
+            }
+            startActivity(intent)
+            requireActivity().finish()
         }
     }
 
