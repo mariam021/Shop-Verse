@@ -22,12 +22,4 @@ class ProfileVM(context: Context) : ViewModel() {
             _user.value = fetchedUser
         }
     }
-
-//    fun logoutUser() {
-//        viewModelScope.launch {
-//            _user.value?.let { user ->
-//                userRepository.setUserLoggedInStatus(user.email, false)
-//            }
-//        }
-//    }
 }

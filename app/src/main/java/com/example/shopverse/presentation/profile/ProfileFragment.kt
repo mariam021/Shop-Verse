@@ -60,7 +60,6 @@ class ProfileFragment : Fragment() {
             if (userEmail != null) {
                 userRepository.deleteUser(userEmail)
             }
-            //viewModel.logoutUser()
             val bundle = Bundle().apply {
                 putSerializable("navigationSource", NavigationDestination.ProfileFragment)
             }
