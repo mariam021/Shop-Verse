@@ -23,11 +23,11 @@ class ProfileVM(context: Context) : ViewModel() {
         }
     }
 
-    fun logoutUser() {
-        viewModelScope.launch {
-            _user.value?.let { user ->
-                userRepository.setUserLoggedInStatus(user.email, false)
-            }
-        }
-    }
+//    fun logoutUser() {
+//        viewModelScope.launch {
+//            _user.value?.let { user ->
+//                userRepository.setUserLoggedInStatus(user.email, false)
+//            }
+//        }
+//    }
 }
