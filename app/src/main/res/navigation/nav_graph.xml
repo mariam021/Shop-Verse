@@ -52,6 +52,18 @@
         <argument
             android:name="weight"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_itemFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_itemFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
+        <action
+            android:id="@+id/action_itemFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <argument
+            android:name="navigationSource"
+            app:argType="com.example.shopverse.presentation.entry.NavigationDestination" />
     </fragment>
 
     <fragment

@@ -23,6 +23,7 @@ import com.bumptech.glide.Glide
 import com.example.shopverse.data.local.user.UserDatabase
 import com.example.shopverse.data.remote.ProductModule
 import com.example.shopverse.domain.repo.user.UserRepository
+import com.example.shopverse.presentation.entry.NavigationDestination
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -78,7 +79,8 @@ class HomeFragment : Fragment() {
                     warrantyInformation = product.warrantyInformation,
                     stock = product.stock,
                     rating = product.rating.toFloat(),
-                    weight = product.weight
+                    weight = product.weight,
+                    navigationSource = NavigationDestination.HomeFragment
                 )
                 findNavController().navigate(action)
             }
@@ -100,6 +102,10 @@ class HomeFragment : Fragment() {
         viewModel.fetchProducts()
         requireActivity().onBackPressedDispatcher.addCallback(){
             showExitDialog()
+        }
+
+        val bundle = Bundle().apply {
+            putSerializable("navigationSource", NavigationDestination.HomeFragment)
         }
     }
 

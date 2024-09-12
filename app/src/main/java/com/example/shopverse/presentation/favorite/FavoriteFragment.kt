@@ -14,6 +14,7 @@ import com.example.shopverse.data.local.product.ProductDatabase
 import com.example.shopverse.databinding.FragmentFavoriteBinding
 import com.example.shopverse.databinding.FragmentItemBinding
 import com.example.shopverse.domain.repo.product.ProductRepository
+import com.example.shopverse.presentation.entry.NavigationDestination
 import com.example.shopverse.presentation.home.HomeFragmentDirections
 import com.example.shopverse.presentation.home.HomeVM
 
@@ -70,7 +71,8 @@ class FavoriteFragment : Fragment() {
                     warrantyInformation = product.warrantyInformation,
                     stock = product.stock,
                     rating = product.rating.toFloat(),
-                    weight = product.weight
+                    weight = product.weight,
+                    navigationSource = NavigationDestination.FavouriteFragment
                 )
                 findNavController().navigate(action)
             }
@@ -87,6 +89,10 @@ class FavoriteFragment : Fragment() {
             }
         }
         favVM.getFavoriteProducts()
+
+        val bundle = Bundle().apply {
+            putSerializable("navigationSource", NavigationDestination.FavouriteFragment)
+        }
     }
 
     override fun onDestroy() {

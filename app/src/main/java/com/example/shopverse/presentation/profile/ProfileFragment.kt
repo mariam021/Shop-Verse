@@ -6,13 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import com.example.shopverse.data.local.product.ProductDatabase
+import com.example.shopverse.data.local.user.UserDatabase
 import com.example.shopverse.databinding.FragmentProfileBinding
+import com.example.shopverse.domain.repo.product.ProductRepository
+import com.example.shopverse.domain.repo.user.UserRepository
 import com.example.shopverse.presentation.entry.EnteryActivity
 import com.example.shopverse.presentation.entry.NavigationDestination
+import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
+    private lateinit var productRepository: ProductRepository
+    private lateinit var userRepository: UserRepository
     private lateinit var viewModel: ProfileVM
 
     override fun onCreateView(
@@ -25,6 +33,8 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        userRepository = UserRepository(UserDatabase.getUserDatabase(requireContext()).userDao())
+        productRepository = ProductRepository(ProductDatabase.getProductDatabase(requireContext()).productDao())
         val viewModelFactory = ProfileViewModelFactory(requireContext())
         viewModel = ViewModelProvider(this, viewModelFactory)[ProfileVM::class.java]
         viewModel.loadUser()
@@ -42,16 +52,24 @@ class ProfileFragment : Fragment() {
     }
 
     private fun signOutUser() {
-        viewModel.logoutUser()
-
-        val bundle = Bundle().apply {
-            putSerializable("navigationSource", NavigationDestination.ProfileFragment)
+        lifecycleScope.launch {
+            lifecycleScope.launch {
+                productRepository.deleteAllProducts()
+                val userEmail = viewModel.user.value?.email
+                if (userEmail != null) {
+                    userRepository.deleteUser(userEmail)
+                }
+                viewModel.logoutUser()
+                val bundle = Bundle().apply {
+                    putSerializable("navigationSource", NavigationDestination.ProfileFragment)
+                }
+                val intent = Intent(requireActivity(), EnteryActivity::class.java).apply {
+                    putExtras(bundle)
+                }
+                startActivity(intent)
+                requireActivity().finish()
+            }
         }
-        val intent = Intent(requireActivity(), EnteryActivity::class.java).apply {
-            putExtras(bundle)
-        }
-        startActivity(intent)
-        requireActivity().finish()
     }
 
     override fun onDestroyView() {

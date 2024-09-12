@@ -22,11 +22,11 @@ class UserRepository(private val userDao: UserDao) {
         }
     }
 
-    suspend fun getLoggedInUser(): User? {
-        return userDao.getLoggedInUser()
-    }
-
     suspend fun setUserLoggedInStatus(email: String, isLoggedIn: Boolean) {
         userDao.setUserLoggedInStatus(email, isLoggedIn)
+    }
+
+    suspend fun deleteUser(email: String) {
+        userDao.deleteUser(email)
     }
 }

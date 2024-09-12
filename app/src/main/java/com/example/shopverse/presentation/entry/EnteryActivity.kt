@@ -16,6 +16,7 @@ import com.example.shopverse.presentation.main.MainActivity
 import com.example.shopverse.presentation.splash.SplashFragmentDirections
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+
 class EnteryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEnteryBinding
     private lateinit var navController: NavController
@@ -34,12 +35,17 @@ class EnteryActivity : AppCompatActivity() {
         entryVM = ViewModelProvider(this, EntryVMFactory(userRepository))[EntryVM::class.java]
 
         lifecycleScope.launch {
-            val destination = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-                intent.getSerializableExtra("navigationSource", NavigationDestination::class.java) ?: SplashFragment
-            } else {
-                @Suppress("DEPRECATION")
-                intent.getSerializableExtra("navigationSource") as? NavigationDestination ?: SplashFragment
-            }
+            val destination =
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+                    intent.getSerializableExtra(
+                        "navigationSource",
+                        NavigationDestination::class.java
+                    ) ?: SplashFragment
+                } else {
+                    @Suppress("DEPRECATION")
+                    intent.getSerializableExtra("navigationSource") as? NavigationDestination
+                        ?: SplashFragment
+                }
 
             delay(1200)
 
@@ -54,21 +60,18 @@ class EnteryActivity : AppCompatActivity() {
                 val action = SplashFragmentDirections.actionSplashFragmentToLoginFragment()
                 navController.navigate(action)
             }
+
             SplashFragment -> {
                 if (user != null) {
-                    if (user.isLoggedIn) {
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    } else {
-                        val action = SplashFragmentDirections.actionSplashFragmentToLoginFragment()
-                        navController.navigate(action)
-                    }
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 } else {
                     val action = SplashFragmentDirections.actionSplashFragmentToWelcomeFragment()
                     navController.navigate(action)
                 }
             }
+
             else -> {
             }
         }
