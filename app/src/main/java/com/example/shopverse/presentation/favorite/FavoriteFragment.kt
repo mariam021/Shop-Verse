@@ -90,9 +90,6 @@ class FavoriteFragment : Fragment() {
         }
         favVM.getFavoriteProducts()
 
-        val bundle = Bundle().apply {
-            putSerializable("navigationSource", NavigationDestination.FavouriteFragment)
-        }
     }
 
     override fun onDestroy() {

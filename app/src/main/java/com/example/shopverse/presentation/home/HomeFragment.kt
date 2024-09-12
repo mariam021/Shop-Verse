@@ -104,9 +104,6 @@ class HomeFragment : Fragment() {
             showExitDialog()
         }
 
-        val bundle = Bundle().apply {
-            putSerializable("navigationSource", NavigationDestination.HomeFragment)
-        }
     }
 
     override fun onDestroyView() {

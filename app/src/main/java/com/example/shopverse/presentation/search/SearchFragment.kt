@@ -93,9 +93,6 @@ class SearchFragment : Fragment() {
 
         viewModel.fetchProducts()
 
-        val bundle = Bundle().apply {
-            putSerializable("navigationSource", NavigationDestination.SearchFragment)
-        }
     }
 
 
