@@ -17,6 +17,7 @@ import com.example.shopverse.databinding.FragmentHomeBinding
 import com.example.shopverse.databinding.FragmentSearchBinding
 import com.example.shopverse.domain.repo.product.ProductRepository
 import com.example.shopverse.domain.repo.user.UserRepository
+import com.example.shopverse.presentation.entry.NavigationDestination
 import com.example.shopverse.presentation.home.HomeFragmentDirections
 import com.example.shopverse.presentation.home.HomeVM
 import com.example.shopverse.presentation.home.ProductViewModelFactory
@@ -64,7 +65,8 @@ class SearchFragment : Fragment() {
                     warrantyInformation = product.warrantyInformation,
                     stock = product.stock,
                     rating = product.rating.toFloat(),
-                    weight = product.weight
+                    weight = product.weight,
+                    navigationSource = NavigationDestination.SearchFragment
                 )
                 findNavController().navigate(action)
             }
@@ -90,6 +92,10 @@ class SearchFragment : Fragment() {
         })
 
         viewModel.fetchProducts()
+
+        val bundle = Bundle().apply {
+            putSerializable("navigationSource", NavigationDestination.SearchFragment)
+        }
     }
 
 
