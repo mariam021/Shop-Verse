@@ -10,5 +10,4 @@ data class User(
     val password: String,
     val userName: String,
     val phone: String,
-    //val isLoggedIn: Boolean = false
 )

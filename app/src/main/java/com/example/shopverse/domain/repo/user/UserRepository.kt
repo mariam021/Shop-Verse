@@ -22,10 +22,6 @@ class UserRepository(private val userDao: UserDao) {
         }
     }
 
-//    suspend fun setUserLoggedInStatus(email: String, isLoggedIn: Boolean) {
-//        userDao.setUserLoggedInStatus(email, isLoggedIn)
-//    }
-
     suspend fun deleteUser(email: String) {
         userDao.deleteUser(email)
     }

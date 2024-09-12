@@ -18,10 +18,6 @@ class LoginFragmentVM(context: Context) : ViewModel() {
         viewModelScope.launch {
             val user = userRepository.getUserByEmail(email)
             _loginResult.value = user?.let { it.password == password } ?: false
-
-//            if (_loginResult.value == true) {
-//                userRepository.setUserLoggedInStatus(email, true)
-//            }
         }
     }
 }

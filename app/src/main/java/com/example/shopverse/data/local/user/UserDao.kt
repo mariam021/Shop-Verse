@@ -17,9 +17,6 @@ interface UserDao {
     @Insert
     suspend fun insertUser(user: User)
 
-//    @Query("UPDATE User SET isLoggedIn = :isLoggedIn WHERE email = :email")
-//    suspend fun setUserLoggedInStatus(email: String, isLoggedIn: Boolean)
-
     @Query("DELETE FROM User WHERE email = :email")
     suspend fun deleteUser(email: String)
 }
