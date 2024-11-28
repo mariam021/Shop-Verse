@@ -92,7 +92,7 @@
                             android:layout_weight="1"
                             android:drawablePadding="4dp"
                             app:drawableStartCompat="@drawable/phone_ic"
-                            tools:text="phone" />
+                            android:text="phone" />
 
                         <TextView
                             android:id="@+id/userPhone"

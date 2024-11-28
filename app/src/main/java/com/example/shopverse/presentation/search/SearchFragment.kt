@@ -10,18 +10,10 @@ import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.shopverse.R
 import com.example.shopverse.data.local.product.ProductDatabase
-import com.example.shopverse.data.local.user.UserDatabase
-import com.example.shopverse.databinding.FragmentHomeBinding
 import com.example.shopverse.databinding.FragmentSearchBinding
 import com.example.shopverse.domain.repo.product.ProductRepository
-import com.example.shopverse.domain.repo.user.UserRepository
 import com.example.shopverse.presentation.entry.NavigationDestination
-import com.example.shopverse.presentation.home.HomeFragmentDirections
-import com.example.shopverse.presentation.home.HomeVM
-import com.example.shopverse.presentation.home.ProductViewModelFactory
-import java.util.ArrayList
 import java.util.Locale
 
 class SearchFragment : Fragment() {
@@ -79,20 +71,29 @@ class SearchFragment : Fragment() {
         }
 
         binding.recyclerView.adapter = searchAdapter
+        binding.searchView.onQueryTextListener( onQueryTextChange = { textChanged ->
+            filterList(textChanged)
+        },
+            onQueryTextSubmit = {
 
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            })
+
+
+        viewModel.fetchProducts()
+
+    }
+    fun SearchView.onQueryTextListener(onQueryTextChange:(String?) -> Unit, onQueryTextSubmit:(String?) -> Unit  ) {
+        this.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
+                onQueryTextSubmit.invoke(query)
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                filterList(newText)
+                onQueryTextChange.invoke(newText)
                 return true
             }
         })
-
-        viewModel.fetchProducts()
-
     }
 
 
